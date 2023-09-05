@@ -51,24 +51,27 @@ def merge_datasets(folder_list, output_folder):
 
     # 合并metadata
     with open(os.path.join(output_folder, 'metadata.csv'), 'w', encoding='utf-8', newline='') as out_csv:
-        writer = csv.writer(out_csv)
+        
+        with open(os.path.join(output_folder, 'metadata.csv'), 'w', encoding='utf-8', newline='') as out_csv:
+            writer = csv.writer(out_csv, delimiter='|', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        for folder in folder_list:
-            episode_num = folder.split('-')[-1]  # 获取集数作为前缀
-            metadata_file = os.path.join(folder, 'metadata.csv')
-            wavs_folder = os.path.join(folder, 'wavs')
+            for folder in folder_list:
+                episode_num = folder.split('-')[-1]  # 获取集数作为前缀
+                metadata_file = os.path.join(folder, 'metadata.csv')
+                wavs_folder = os.path.join(folder, 'wavs')
 
-            # 拷贝wavs到统一文件夹
-            for wav_file in os.listdir(wavs_folder):
-                new_wav_name = f"{episode_num}_{wav_file}"
-                shutil.copy(os.path.join(wavs_folder, wav_file), os.path.join(wavs_output_folder, new_wav_name))
+                # 拷贝wavs到统一文件夹
+                for wav_file in os.listdir(wavs_folder):
+                    new_wav_name = f"{episode_num}_{wav_file}"
+                    shutil.copy(os.path.join(wavs_folder, wav_file), os.path.join(wavs_output_folder, new_wav_name))
 
-            # 合并metadata
-            with open(metadata_file, 'r', encoding='utf-8') as in_csv:
-                reader = csv.reader(in_csv)
-                for row in reader:
-                    row[0] = f"{episode_num}_{row[0]}"
-                    writer.writerow(row)
+                # 合并metadata
+                with open(metadata_file, 'r', encoding='utf-8') as in_csv:
+                    with open(metadata_file, 'r', encoding='utf-8') as in_csv:
+                        reader = csv.reader(in_csv, delimiter='|', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                        for row in reader:
+                            row[0] = f"{episode_num}_{row[0]}"
+                            writer.writerow(row)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract audio dataset from anime episodes.")

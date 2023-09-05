@@ -49,6 +49,10 @@ python main.py --input_dir=<input_directory> --output_dir=<output_directory> --t
 2. **Process**: Processes the subtitle and audio files to extract clips corresponding to the target role.
 3. **Merge**: Merges datasets from different episodes into one.
 
+
+## TODO
+
+clean metadata 
 ---
 
 # 动漫音频数据集提取器
@@ -101,4 +105,7 @@ python main.py --input_dir=<输入目录> --output_dir=<输出目录> --target_r
 2. **处理**: 处理字幕和音频文件，以提取与目标角色对应的片段。
 3. **合并**: 将不同剧集的数据集合并为一个。
 
+## TODO
+
+metadata.csv的数据清理
 ---

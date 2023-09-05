@@ -37,7 +37,7 @@ class Trimmer():
                             audio_filename = f"{start_time}_{end_time}.wav"
                             audio_path = os.path.join(output_folder, "wavs", audio_filename)
                             extracted_audio.export(audio_path, format="wav")
-                            metadata.append(f"{audio_filename}|{dialogue}|{prev_role}")
+                            metadata.append([audio_filename, dialogue, prev_role])   
 
                         # 重置
                         start_time = None
@@ -59,13 +59,14 @@ class Trimmer():
                 audio_filename = f"{start_time}_{end_time}.wav"
                 audio_path = os.path.join(output_folder, "wavs", audio_filename)
                 extracted_audio.export(audio_path, format="wav")
-                metadata.append(f"{audio_filename}|{dialogue}|{prev_role}")
+                metadata.append([audio_filename, dialogue, prev_role])
 
         # 保存元数据
         with open(os.path.join(output_folder, "metadata.csv"), 'w', encoding='utf-8', newline='') as f:
-            writer = csv.writer(f)
+            writer = csv.writer(f , delimiter='|')
             for entry in metadata:
-                writer.writerow([entry])
+                print(entry)
+                writer.writerow(entry)
 
 if __name__ == "__main__":
     
