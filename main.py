@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 verbose = True
 # 提取ASS文件和音频的函数
-def extract(episode, subtitle_stream="0:s:2"):
+def extract(episode, subtitle_stream="0:s:2", audio_stream="0:a:1"):
     video = VideoFileClip(episode)
     output_ass_filename = episode[:-4] + ".ass"
     output_wav_filename = episode[:-4] + ".wav"
@@ -22,11 +22,9 @@ def extract(episode, subtitle_stream="0:s:2"):
     
     if not os.path.exists(output_wav_filename):
         if verbose:
-            print(f"Extracting audio to {output_wav_filename}...")
-        audio = video.audio
-        audio.write_audiofile(output_wav_filename)
-        audio.close()
-    video.close()
+            print(f"Extracting first audio track to {output_wav_filename}...")
+        os.system(f'ffmpeg -i "{episode}" -map {audio_stream} "{output_wav_filename}"')
+
 
 # 对已有的音频字幕文件提取某个角色的所有音频数据集的函数
 def process_ass_file(ass_file, audio_file, output_folder, trimmer:Trimmer):
@@ -79,7 +77,9 @@ if __name__ == "__main__":
     parser.add_argument("--output_dir", type=str, default='./output', help="Directory to save output datasets.")
     parser.add_argument("--target_role", type=str,  help="Target role to extract audio.")
     parser.add_argument("--subtitle", type=str, default='0:s:2',  help="the stream of the subtitle")
+    parser.add_argument("--audio_stream", type=str, default='0:s:2',  help="the stream of the sound")
     parser.add_argument("--verbose", type=bool,  help="whether to verbose the process")
+    
 
     args = parser.parse_args()
 
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     output_folders = []
     for episode in tqdm(episode_list, desc="processing"):
-        extract(episode, args.subtitle)
+        extract(episode, args.subtitle, args.audio_stream)
 
         ass_file = episode[:-4] + ".ass"
         audio_file = episode[:-4] + ".wav"
