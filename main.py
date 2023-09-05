@@ -77,7 +77,7 @@ if __name__ == "__main__":
     parser.add_argument("--output_dir", type=str, default='./output', help="Directory to save output datasets.")
     parser.add_argument("--target_role", type=str,  help="Target role to extract audio.")
     parser.add_argument("--subtitle", type=str, default='0:s:2',  help="the stream of the subtitle")
-    parser.add_argument("--audio_stream", type=str, default='0:s:2',  help="the stream of the sound")
+    parser.add_argument("--audio_stream", type=str, default='0:a:2',  help="the stream of the sound")
     parser.add_argument("--verbose", type=bool,  help="whether to verbose the process")
     
 
