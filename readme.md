@@ -41,7 +41,7 @@ python main.py --input_dir=<input_directory> --output_dir=<output_directory> --t
 - `--output_dir`: Directory to save the output datasets (default is `./output`).
 - `--target_role`: The role whose audio you want to extract.
 - `--subtitle`: The stream of the subtitle (default is `0:s:2`).
-- `--verbose`: Whether to verbose the process (default is `True`).
+- `--verbose`: Whether to verbose the process
 
 ## How it Works
 
@@ -93,7 +93,7 @@ python main.py --input_dir=<输入目录> --output_dir=<输出目录> --target_r
 - `--output_dir`: 用于保存输出数据集的目录（默认为`./output`）。
 - `--target_role`: 要提取的角色的音频。
 - `--subtitle`: 字幕流（默认为`0:s:2`）。
-- `--verbose`: 是否输出详细信息（默认为`True`）。
+- `--verbose`: 是否输出详细信息
 
 ## 工作原理
 
